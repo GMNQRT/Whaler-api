@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'image/list'
+  get '/container' => 'container#list'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
