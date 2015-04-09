@@ -3,6 +3,10 @@ require 'docker'
 class HomeController < ApplicationController
   respond_to :json
   def index
-    respond_with Docker::Image.all
+    values = {
+      :version => Docker.version,
+      :info => Docker.info,
+    }
+    respond_with values
   end
 end
