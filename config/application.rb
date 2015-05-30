@@ -19,15 +19,7 @@ module WhalerApi
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    # Docker.url = 'tcp://192.168.59.103:2376'
-    # Docker.options = {
-    #   client_cert: File.join(ENV["DOCKER_CERT_PATH"], 'cert.pem'),
-    #   client_key: File.join(ENV["DOCKER_CERT_PATH"], 'key.pem'),
-    #   ssl_ca_file: File.join(ENV["DOCKER_CERT_PATH"], 'ca.pem'),
-    #   scheme: 'https'
-    # }
     Excon.defaults[:ssl_verify_peer] = false
-
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 

@@ -1,0 +1,29 @@
+#api_version
+# When running docker using SSL, setting the DOCKER_CERT_PATH will configure docker-api to use SSL.
+# When running docker using SSL, setting the DOCKER_CERT_PATH will configure docker-api to use SSL.
+# The cert path is a folder that contains the cert, key and cacert files.
+# docker-api is expecting the files to be named: cert.pem, key.pem, and ca.pem.
+# If your files are named different, you'll want to set your options explicity:
+#
+#   url: 'https://192.168.59.103:2376'
+#   ssl_options:
+#     cert_path: ~/.boot2docker/certs
+#     client_cert: cert.pem
+#     client_key: key.pem
+#     ssl_ca_file: ca.pem
+#     scheme: 'http
+
+default: &default
+  url: https://192.168.59.103:2376
+  ssl_options:
+    cert_path: ~/.boot2docker/certs/boot2docker-vm
+    scheme: 'https'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
