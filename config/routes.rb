@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :image do
     member do
       get 'history'
+    end
+
+    collection do
       get 'search'
     end
   end

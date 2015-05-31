@@ -1,4 +1,3 @@
-#api_version
 # When running docker using SSL, setting the DOCKER_CERT_PATH will configure docker-api to use SSL.
 # When running docker using SSL, setting the DOCKER_CERT_PATH will configure docker-api to use SSL.
 # The cert path is a folder that contains the cert, key and cacert files.
