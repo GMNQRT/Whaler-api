@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
   get 'home/index'
-  get '/images' => 'image#list'
+
   get '/container' => 'container#list'
+
+
+  resources :image do
+    member do
+      get 'history'
+      get 'search'
+    end
+  end
+
 end
