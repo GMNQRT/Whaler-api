@@ -51,6 +51,7 @@ group :development, :test do
 end
 
 gem 'rack-cors', :require => 'rack/cors'
+gem 'angular_rails_csrf'
 
 
 #windows only

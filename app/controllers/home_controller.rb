@@ -2,6 +2,7 @@ require 'docker'
 
 class HomeController < ApplicationController
   respond_to :json
+
   def index
     values = {
       :version => Docker.version,
