@@ -10,10 +10,10 @@ class ImageController < ApplicationController
   end
 
   def create
-    image = Docker::Image.create('fromImage' => params[:fromImage])
-    image.tag('repo' => 'base2', 'force' => true)
-    image.save
-    respond_with image
+    # image = Docker::Image.create('fromImage' => params[:fromImage])
+    # image.tag('repo' => 'base2', 'force' => true)
+    # image.save
+    # respond_with image
   end
 
   def history
