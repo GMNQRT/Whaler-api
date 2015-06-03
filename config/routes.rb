@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: "users/sessions" }
 
+  resources :admin_registrations
+
   get 'home/index'
 
   resources :image do
