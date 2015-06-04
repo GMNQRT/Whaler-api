@@ -18,11 +18,16 @@ Rails.application.routes.draw do
 
   resources :container do
     member do
-      get 'history'
+      get 'start'
     end
-
-    collection do
-      get 'search'
+    member do
+      get 'stop'
+    end
+    member do
+      get 'pause'
+    end
+    member do
+      get 'unpause'
     end
   end
 
