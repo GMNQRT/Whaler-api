@@ -29,4 +29,9 @@ class ContainerController < ApplicationController
     @Container = Docker::Container.get(params[:id])
     respond_with @Container.unpause
   end
+
+  def restart
+    @Container = Docker::Container.get(params[:id])
+    respond_with @Container.restart
+  end
 end

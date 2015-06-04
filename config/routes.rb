@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     member do
       get 'unpause'
     end
+    member do
+      get 'restart'
+    end
   end
 
 end
