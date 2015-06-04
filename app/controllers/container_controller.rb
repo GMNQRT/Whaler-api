@@ -32,7 +32,23 @@ class ContainerController < ApplicationController
   end
 
   def show
-    respond_with Docker::Container.get(params[:id])
+    @Container = Docker::Container.get(params[:id])
+    @stateNumber = 0
+    if @Container.info['State']['ExitCode'] == -1
+      @stateNumber = -1;
+    end
+    if @Container.info['State']['Dead']
+      @stateNumber = 1;
+    end
+    if @Container.info['State']['Running']
+      @stateNumber = 2;
+    end
+    if @Container.info['State']['Paused']
+      @stateNumber = 3;
+    end
+    @Container.info['State']['stateNumber'] = @stateNumber
+    @Container.info['State'] = @Container.info['State']
+    respond_with @Container
   end
 
   def destroy
