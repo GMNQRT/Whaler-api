@@ -35,6 +35,11 @@ class ContainerController < ApplicationController
     respond_with Docker::Container.get(params[:id])
   end
 
+  def destroy
+    @Container = Docker::Container.get(params[:id])
+    respond_with @Container.delete(:force => true)
+  end
+
   def start
     @Container = Docker::Container.get(params[:id])
     if @Container.info['State']['Paused']
