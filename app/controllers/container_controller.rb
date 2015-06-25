@@ -18,6 +18,10 @@ class ContainerController < ApplicationController
     respond_with @Containers
   end
 
+  def search
+    respond_with params[:term] ? Docker::Container.search(term: params[:term]) : []
+  end
+
   def show
     @Container = Docker::Container.get(params[:id])
     @stateNumber = 0
@@ -86,4 +90,5 @@ class ContainerController < ApplicationController
     @Container = Docker::Container.get(params[:id])
     respond_with @Container.restart
   end
+
 end
