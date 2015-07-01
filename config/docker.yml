@@ -13,10 +13,10 @@
 #     scheme: 'http
 
 default: &default
-  url: https://192.168.59.103:2376
+  url: unix:///var/run/docker.sock
   ssl_options:
-    cert_path: ~/.boot2docker/certs/boot2docker-vm
-    scheme: 'https'
+    cert_path: /home/.docker
+    scheme: 'unix'
 
 development:
   <<: *default
