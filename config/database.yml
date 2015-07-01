@@ -9,5 +9,5 @@ development:
   database: whaler
   username: whaler
   password: admin
-  host: localhost
+  host: db
   port: 3306
