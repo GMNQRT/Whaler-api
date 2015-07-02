@@ -12,18 +12,22 @@ Dir.chdir APP_ROOT do
   system "gem install bundler --conservative"
   system "bundle check || bundle install"
 
-  # puts "\n== Copying sample files =="
-  # unless File.exist?("config/database.yml")
-  #   system "cp config/database.yml.sample config/database.yml"
-  # end
-
   puts "\n== Preparing database =="
   system "bin/rake db:setup"
 
-  puts "\n== Removing old logs and tempfiles =="
-  system "rm -f log/*"
+  puts "\n== Removing old tempfiles =="
+  pid_file = 'tmp/pids/server.pid'
+  if File.file?(pid_file)
+    pid = File.read(pid_file).to_i
+    begin
+      Process.getpgid pid
+      Process.kill "INT", pid
+      print "Shutting down old server instance\n"
+    rescue Exception => e
+      print "Remove old pid file\n"
+    end
+    File.delete pid_file
+  end
   system "rm -rf tmp/cache"
 
-  puts "\n== Restarting application server =="
-  system "touch tmp/restart.txt"
 end
