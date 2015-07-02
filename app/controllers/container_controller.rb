@@ -1,7 +1,5 @@
-require 'docker'
-require 'json'
-
 class ContainerController < ApplicationController
+  skip_before_action :verify_authenticity_token
   respond_to :json
   def index
     @Containers = Docker::Container.all(:all => true)
@@ -91,4 +89,12 @@ class ContainerController < ApplicationController
     respond_with @Container.restart
   end
 
+  def create
+    # puts "dsdsd"
+    # puts params[:name]
+    # puts params[:tag]
+    @Container = Docker::Container.create('name' => [params[:name]], 'Image' => params[:tag] , 'Cmd' => ['-d'])
+    # render json: {}
+    respond_with @Container
+  end
 end

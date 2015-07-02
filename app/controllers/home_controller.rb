@@ -1,5 +1,3 @@
-require 'docker'
-
 class HomeController < ApplicationController
   before_action :authenticate_user_from_token!
   respond_to :json

@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     end
 
     collection do
+      get 'allForContainer'
+    end
+
+    collection do
       get 'search'
     end
   end
