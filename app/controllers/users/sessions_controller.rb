@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
 
     if user && user.valid_password?(params[:password])
       token = user.ensure_authentication_token
-      render json: { auth_token: token }
+      render json: { user: user }
     else
       render nothing: true, status: :unauthorized
     end
