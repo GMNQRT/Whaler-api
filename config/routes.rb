@@ -19,18 +19,11 @@ Rails.application.routes.draw do
   resources :container do
     member do
       get 'start'
-    end
-    member do
       get 'stop'
-    end
-    member do
       get 'pause'
-    end
-    member do
       get 'unpause'
-    end
-    member do
       get 'restart'
+      get 'logs'
     end
   end
 

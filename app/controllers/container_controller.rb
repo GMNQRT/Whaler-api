@@ -1,8 +1,13 @@
 require 'docker'
 require 'json'
+require 'rails/sse'
 
 class ContainerController < ApplicationController
+  include ActionController::Live
+  include Rails::SSE
+
   respond_to :json
+
   def index
     @Containers = Docker::Container.all(:all => true)
     @Containers.each do |item|
@@ -91,4 +96,19 @@ class ContainerController < ApplicationController
     respond_with @Container.restart
   end
 
+
+  def logs
+    container = Docker::Container.get(params[:id])
+    if container
+      stream do |channel|
+        container.attach(stream: true) do |stream, chunk|
+          channel.post(chunk, event: :logs)
+        end
+      end
+    end
+  rescue
+    logger.info "error"
+  ensure
+    logger.info "Ended"
+  end
 end
