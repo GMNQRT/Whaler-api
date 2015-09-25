@@ -28,6 +28,7 @@ Dir.chdir APP_ROOT do
     end
     File.delete pid_file
   end
+  File.delete 'tmp/pids/monit.pid'
   system "rm -rf tmp/cache"
 
 end

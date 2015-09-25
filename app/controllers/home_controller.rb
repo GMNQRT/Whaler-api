@@ -14,5 +14,4 @@ class HomeController < ApplicationController
     respond_with values
   end
 
-
 end

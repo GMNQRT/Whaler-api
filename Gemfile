@@ -33,6 +33,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "puma"
 gem 'sse-rails'
 
+# Use websockets
+gem 'websocket-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'

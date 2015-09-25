@@ -1,0 +1,1 @@
+#<Docker::Event:0x007f9e97fc8068 @status="stop", @id="1bc10d478083d9ffbb280b62f01b5b5d4807bc6e5077c7d04770fed88072b4ce", @from="devbox", @time=1443216313>
