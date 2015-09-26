@@ -34,7 +34,8 @@ class ContainerController < ApplicationController
 
   def stop
     @Container = Docker::Container.get(params[:id])
-    respond_with(if @Container.info['State']['Paused'] then @Container.unpause! else @Container.stop! end)
+    @Container.unpause! if @Container.info['State']['Paused']
+    respond_with @Container.stop!
   end
 
   def pause
