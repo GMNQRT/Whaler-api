@@ -23,12 +23,12 @@ Dir.chdir APP_ROOT do
       Process.getpgid pid
       Process.kill "INT", pid
       print "Shutting down old server instance\n"
-    rescue Exception => e
+    rescue Exception
       print "Remove old pid file\n"
     end
     File.delete pid_file
   end
-  File.delete 'tmp/pids/monit.pid'
+  File.delete 'tmp/pids/monit.pid' if File.file?('tmp/pids/monit.pid')
   system "rm -rf tmp/cache"
 
 end
