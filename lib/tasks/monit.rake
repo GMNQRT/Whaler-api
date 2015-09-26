@@ -2,14 +2,14 @@ namespace :monit do
   namespace :event do
     desc "Start deamon which monitoring docker's event"
     task start: :environment do
-      start(Rails.root.join('log', 'monit_event.pid'), Rails.root.join('tmp/pids', 'monit_event.log')) do
+      start(Rails.root.join('tmp/pids', 'monit_event.pid'), Rails.root.join('log', 'monit_event.log')) do
         EventJob.perform()
       end
     end
 
     desc "Stop deamon which monitoring docker's event"
     task stop: :environment do
-      stop(Rails.root.join('log', 'monit_event.pid'), Rails.root.join('tmp/pids', 'monit_event.log'))
+      stop(Rails.root.join('tmp/pids', 'monit_event.pid'), Rails.root.join('log', 'monit_event.log'))
     end
   end
 end
@@ -26,10 +26,12 @@ def start(pid_file, log_file)
       Process.daemon(true, true)
     end
 
+    Signal.trap('EXIT') do
+      File.delete pid_file if File.file?(pid_file)
+      abort
+    end
+
     File.open(pid_file, 'w') { |f| f << Process.pid }
-
-    Signal.trap('TERM') { abort }
-
     Rails.logger.info "Start daemon..."
 
     begin
