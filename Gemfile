@@ -31,7 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem "puma"
-gem 'sse-rails'
+# gem 'sse-rails'
 
 # Use websockets
 gem 'websocket-rails'

@@ -1,8 +1,8 @@
 require 'docker'
 
 class HomeController < ApplicationController
-  # skip_before_action :set_xsrf_token_cookie
-  # before_action :authenticate_user_from_token!
+  skip_before_action :set_xsrf_token_cookie
+  before_action :authenticate_user_from_token!
   respond_to :json
 
   def index
