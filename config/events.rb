@@ -16,7 +16,7 @@ WebsocketRails::EventMap.describe do
   subscribe :connection_closed, to: Websockets::ContainerController, with_method: :delete_user
 
   namespace :container do
-    subscribe :watchlogs, to: Websockets::ContainerController, with_method: :watchlogs
-    subscribe :unwatchlogs, to: Websockets::ContainerController, with_method: :unwatchlogs
+    subscribe :subscribe, to: Websockets::ContainerController, with_method: :watchlogs
+    subscribe :unsubscribe, to: Websockets::ContainerController, with_method: :unwatchlogs
   end
 end
