@@ -11,12 +11,4 @@ WebsocketRails::EventMap.describe do
   #     subscribe :new, :to => ProductController, :with_method => :new_product
   #   end
   # The above will handle an event triggered on the client like `product.new`.
-
-  subscribe :client_disconnected, to: Websockets::ContainerController, with_method: :delete_user
-  subscribe :connection_closed, to: Websockets::ContainerController, with_method: :delete_user
-
-  namespace :container do
-    subscribe :subscribe, to: Websockets::ContainerController, with_method: :watchlogs
-    subscribe :unsubscribe, to: Websockets::ContainerController, with_method: :unwatchlogs
-  end
 end
