@@ -1,6 +1,4 @@
 class ContainerController < ApplicationController
-  respond_to :json
-
   def index
     @Containers = Docker::Container.all(:all => true)
     respond_with @Containers.collect { |container| Docker::Container.get(container.id) }
