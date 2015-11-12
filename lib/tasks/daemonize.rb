@@ -15,6 +15,9 @@ def start_daemon(pid_file, log_file)
       abort
     end
 
+    path = File.expand_path pid_file
+    FileUtils.mkdir_p File.dirname(path) unless File.exist? path
+
     File.open(pid_file, 'w') { |f| f << Process.pid }
     Rails.logger.info "Start daemon..."
 
