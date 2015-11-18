@@ -5,16 +5,16 @@ FROM ruby:2.2.0
 RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Build whaler-api project
-RUN mkdir /whaler-api
-WORKDIR /whaler-api
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
 
 # Add and install Gemfile
-ADD ./Gemfile /whaler-api/Gemfile
-ADD ./Gemfile.lock /whaler-api/Gemfile.lock
-RUN bundle install
+ADD ./Gemfile /usr/src/app/Gemfile
+ADD ./Gemfile.lock /usr/src/app/Gemfile.lock
+# RUN bundle install
 
 # Add source code
-ADD . /whaler-api
+ADD . /usr/src/app
 
 # Expose server port
 EXPOSE 3000
