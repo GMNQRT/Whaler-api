@@ -6,7 +6,7 @@ def start_daemon(pid_file, log_file)
     Rails.logger       = Logger.new(log_file)
     Rails.logger.level = Logger.const_get((ENV['LOG_LEVEL'] || 'info').upcase)
 
-    unless ENV['DEBUG']
+    if ENV['DAEMONIZE']
       Process.daemon(true, false)
     end
 
