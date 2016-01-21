@@ -14,4 +14,9 @@ class ImageController < ApplicationController
   def search
     respond_with params[:term] ? Docker::Image.search(term: params[:term]) : []
   end
+
+  def destroy
+    @Image = Docker::Image.get(params[:id])
+    respond_with @Image.delete(:force => true)
+  end
 end
