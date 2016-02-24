@@ -19,4 +19,14 @@ class ImageController < ApplicationController
     @Image = Docker::Image.get(params[:id])
     respond_with @Image.delete(:force => true)
   end
+
+  def run
+    @image     = Docker::Image.create(fromImage: params[:id])
+    @container = Docker::Container.create(Image: params[:id])
+
+    @container.start
+    respond_to do |format|
+      format.json { render json: @container }
+    end
+  end
 end

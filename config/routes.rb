@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :image do
     member do
       get 'history'
+      post 'run'
     end
 
     collection do
