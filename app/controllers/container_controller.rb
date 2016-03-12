@@ -44,17 +44,13 @@ class ContainerController < ApplicationController
     respond_with @Container.restart
   end
 
-  def update
+  def binds
     @Container = Docker::Container.get(params[:id])
 
     if @Container.info['State']['Running']
-      @Container.restart! params.require(:container).require(:info).require(:HostConfig)
+      respond_with @Container.restart! params.require(:data)
     else
-      @Container.start! params.require(:container).require(:info).require(:HostConfig)
-    end
-
-    respond_to do |format|
-      format.all { render nothing: true, status: 204 }
+      respond_with @Container.start! params.require(:data)
     end
   end
 end

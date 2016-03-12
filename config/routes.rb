@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get 'unpause'
       get 'restart'
       get 'logs'
+      put 'binds'
     end
   end
 
