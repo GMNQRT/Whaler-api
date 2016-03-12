@@ -1,6 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  BetterErrors::Middleware.allow_ip! "192.168.99.1"
+
   # Needed for streaming content while fetching other requests
   config.allow_concurrency = true
 
