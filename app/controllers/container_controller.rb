@@ -47,8 +47,10 @@ class ContainerController < ApplicationController
   def binds
     @Container = Docker::Container.get(params[:id])
 
-    if @Container.info['State']['Running']
-      respond_with @Container.restart! params.require(:data)
+    if @Container.info['State']['Running'] # restart seems not working
+      @Container.stop!()
+      @Container.wait()
+      respond_with @Container.start! params.require(:data)
     else
       respond_with @Container.start! params.require(:data)
     end
