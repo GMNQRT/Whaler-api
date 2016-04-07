@@ -2,7 +2,11 @@ class AdminRegistrationsController < ApplicationController
   before_action :authenticate_user_from_token!
 
   def index
-    @users = User.all
+    if current_user.admin?
+      @users = User.all
+    else
+      @users = [current_user]
+    end
     render json: @users
   end
 

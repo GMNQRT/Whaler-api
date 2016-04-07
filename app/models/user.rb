@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
     self.authentication_token
   end
 
+  def admin?
+    self.role == 'Admin'
+  end
+
   private
 
   def generate_authentication_token
