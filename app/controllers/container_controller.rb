@@ -1,4 +1,6 @@
 class ContainerController < ApplicationController
+  before_action :authenticate_user_from_token!
+  
   def index
     @Containers = Docker::Container.all(:all => true)
     respond_with @Containers.collect { |container| Docker::Container.get(container.id) }

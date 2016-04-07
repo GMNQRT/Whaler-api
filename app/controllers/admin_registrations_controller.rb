@@ -1,9 +1,15 @@
 class AdminRegistrationsController < ApplicationController
-  before_action :authenticate_user!
-
+  before_action :authenticate_user_from_token!
+  
   def index
     @users = User.all
-    authorize! :manage, @users
+    # authorize! :manage, @users
+    render json: @users
+  end
+
+  def show
+    @user = User.find(params[:id])
+    render json: @user
   end
 
   def new
@@ -50,6 +56,6 @@ class AdminRegistrationsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :role, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :role, :email, :password, :password_confirmation)
   end
 end

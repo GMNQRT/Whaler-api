@@ -1,4 +1,6 @@
 class ImageController < ApplicationController
+  before_action :authenticate_user_from_token!
+  
   def index
     respond_with Docker::Image.all
   end
