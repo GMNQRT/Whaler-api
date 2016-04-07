@@ -1,6 +1,6 @@
 class ImageController < ApplicationController
   before_action :authenticate_user_from_token!
-  
+
   def index
     respond_with Docker::Image.all
   end
@@ -34,7 +34,7 @@ class ImageController < ApplicationController
     container_config = {}
     config           = params.require(:config)
 
-    container_config[:Image]        = "#{params[:id]}:#{config[:tag][:name]}"
+    container_config[:Image]        = config[:tag].present? ? "#{params[:id]}:#{config[:tag][:name]}" : params[:id]
     container_config[:AttachStdout] = true
     container_config[:Cmd]          = config[:command].split " "
     container_config[:Entrypoint]   = config[:entrypoint].present? ? config[:entrypoint] : nil
