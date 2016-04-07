@@ -3,7 +3,6 @@ class AdminRegistrationsController < ApplicationController
   
   def index
     @users = User.all
-    # authorize! :manage, @users
     render json: @users
   end
 
@@ -12,50 +11,39 @@ class AdminRegistrationsController < ApplicationController
     render json: @user
   end
 
-  def new
-    @user = User.new
-  end
-
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Successfully created User."
-      redirect_to root_path
+      render json: { notice: flash[:notice] }
     else
-      render :action => 'new'
+      render json: { error: flash[:error] }
     end
-  end
-
-  def edit
-    @user = User.find(params[:id])
-    authorize! :manage, @user
   end
 
   def update
     @user = User.find(params[:id])
-    authorize! :manage, @user
     params[:user].delete(:password) if params[:user][:password].blank?
-    params[:user].delete(:password_confirmation) if params[:user][:password].blank?
+    params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
     if @user.update!(user_params)
       flash[:notice] = "Successfully updated User."
-      redirect_to root_path
+      render json: { notice: flash[:notice] }
     else
-      render :action => 'edit'
+      render json: { error: flash[:error] }
     end
   end
 
   def destroy
     @user = User.find(params[:id])
-    authorize! :manage, @user
     if @user.destroy
       flash[:notice] = "Successfully deleted User."
-      redirect_to root_path
+      render json: { notice: flash[:notice] }
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :role, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :role, :email, :password, :created_at, :updated_at, :password_confirmation)
   end
 end
